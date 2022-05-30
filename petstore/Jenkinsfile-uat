@@ -1,0 +1,22 @@
+pipeline {
+   agent any
+   parameters {
+      string(name: 'host', defaultValue: 'localhost', description: 'Host API Manager')
+      string(name: 'port', defaultValue: '8075', description: 'Port API Manager')
+      string(name: 'apiConfigFile', defaultValue: 'uat/api-config.json', description: 'Config File')
+   }
+   stages {
+      stage('Build') {
+         steps {
+            sh "mvn --projects uat --also-make clean install"
+         }
+      }
+      stage('Deploy') {
+         steps {
+            withCredentials([usernamePassword(credentialsId: "uat", usernameVariable: 'username', passwordVariable: 'password')])  {
+               sh "mvn clean exec:java -Dexec.args=\"-c ${params.apiConfigFile} -h ${params.host} -u ${username} -p ${password} -port ${params.port} -force -returnCodeMapping 10:0\""
+            }
+         }
+      }
+   }
+}
