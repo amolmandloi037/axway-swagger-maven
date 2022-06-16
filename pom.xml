@@ -18,6 +18,11 @@
             <artifactId>apimcli-apis</artifactId>
             <version>1.11.0</version>
         </dependency>
+	<dependency>
+   	   <groupId>org.codehaus.sonar-plugins.json</groupId>
+    	   <artifactId>sonar-json-plugin</artifactId>
+    	   <version>2.3</version>
+	</dependency>
 
 
     </dependencies>
