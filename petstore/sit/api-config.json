@@ -4,7 +4,7 @@
     "state": "published",
     "apiDefinition": "petstore.json",
     "organization": "Sample",
-    "securityProfiles": [
+    "securityProfiles": 
         {
             "name": "_default",
             "isDefault": true,
